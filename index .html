@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi terroncito 💗</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    background: black;
+}
+
+/* Fondo de corazones animado */
+.background {
+    position: fixed;
+    inset: 0;
+    background: url("corazones.jpg") repeat;
+    background-size: 350px;
+    animation: moveUp 45s linear infinite;
+    filter: brightness(1.1);
+}
+
+/* Movimiento vertical */
+@keyframes moveUp {
+    from { background-position-y: 0; }
+    to { background-position-y: -2000px; }
+}
+
+/* Latido suave */
+.background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    opacity: 0.7;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+/* Contenedor */
+.container {
+    position: relative;
+    z-index: 2;
+    inset: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Mensaje */
+.message {
+    max-width: 85%;
+    padding: 28px;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(8px);
+    border-radius: 22px;
+    color: #ffd6e8;
+    font-size: 1.25rem;
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Flores al tocar */
+.flower {
+    position: absolute;
+    font-size: 22px;
+    animation: floatUp 2.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 3;
+}
+
+@keyframes floatUp {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-80px) scale(1.5); }
+}
+
+/* Música oculta */
+iframe {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="container">
+    <div class="message">
+        💗 Para mi terroncito 💗<br><br>
+        Hay paisajes bonitos,
+        pero ninguno se siente como tú.<br><br>
+        Gracias por estar,
+        por cuidarme a tu manera,
+        y por hacer que lo simple
+        también sea especial ✨
+    </div>
+</div>
+
+<!-- Música -->
+<iframe
+src="https://www.youtube.com/embed/EO2k0G2N3QY?autoplay=1&loop=1"
+allow="autoplay">
+</iframe>
+
+<script>
+document.body.addEventListener("click", (e) => {
+    const flower = document.createElement("div");
+    flower.classList.add("flower");
+
+    const flowers = ["💙","💜","🌸","🌺","💗"];
+    flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+
+    flower.style.left = e.clientX + "px";
+    flower.style.top = e.clientY + "px";
+
+    document.body.appendChild(flower);
+    setTimeout(() => flower.remove(), 2500);
+});
+</script>
+
+</body>
+</html>
